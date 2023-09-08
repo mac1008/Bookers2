@@ -1,1 +1,59 @@
-<hi>Books index</hi>
+<head>
+
+</head>
+
+<body>
+  <header>
+
+  </header>
+
+  <maim>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <h2>User info</h2>
+          <table>
+            <tr>
+              <th>name</th>
+              <th></th>
+            </tr>
+            <tr>
+              <th>>introduction</th>
+              <th></th>
+            </tr>
+            <%= link_to "アイコン入れる", 'edit_user' %>
+          </table>
+
+          <h2>New book</h2>
+          <%= form_with model: @book do |f| %>
+            <p>Title</p>
+            <%= f.text_field :title %>
+            <p>Opinion</p>
+            <%= f.text_area :body %>
+            <%= f.submit 'Create Book' %>
+          <% end %>
+        </div>
+
+        <div class="col-lg-8">
+          <h2>Books</h2>
+           <table>
+             <tr>
+               <th>Title</th>
+               <th>Opinion</th>
+             </tr>
+             <tr>
+               <th></th>
+               <th></th>
+             </tr>
+           </table>
+
+        </div>
+      </div>
+
+    </div>
+  </maim>
+
+  <footer>
+    <p>CopyRight Infratop.inc</p>
+  </footer>
+</body>
