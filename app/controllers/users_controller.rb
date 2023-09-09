@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = user.find(params[:id])
+    @user = User.find(params[:id])
     @books = @user.books
   end
 
@@ -22,6 +22,11 @@ class UsersController < ApplicationController
 
     end
 
+  end
+
+  private
+  def user_params
+    params.require(:user).permit(:name, :introduction)
   end
 
 end
