@@ -14,6 +14,11 @@
           <h2>User info</h2>
           <table>
             <tr>
+              <% if @user.image.attached? %>
+                <%= image_tag @user.image, size: "100x100" %>
+              <% else %>
+                <%= image_tag 'NO_IMAGE', size: "100x100" %>
+              <% end %>
               <th>name</th>
               <th><%= @user.name %></th>
             </tr>
