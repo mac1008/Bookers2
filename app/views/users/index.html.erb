@@ -21,7 +21,7 @@
               <th>introduction</th>
               <th><%= current_user.introduction %></th>
             </tr>
-            <%= link_to "アイコン入れる", 'edit_user_path' %>
+            <%= link_to "アイコン入れる", edit_user_path(current_user.id) %>
           </table>
 
           <h2>New book</h2>
