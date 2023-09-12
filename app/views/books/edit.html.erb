@@ -1,29 +1,42 @@
-<head>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
 
-</head>
+      <script src="https://kit.fontawesome.com/195c3a23e3.js" crossorigin="anonymous"></script>
 
-<body>
-  <header>
+      <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-  </header>
+  </head>
 
-  <main>
-    <div>
-      <%= flash[:notice] %>
-    </div>
-    <h1>Editing Book</h1>
+  <body>
+    <header>
+  
+    </header>
+  
+    <main>
+      <div>
+        <%= flash[:notice] %>
+      </div>
+      <h1>Editing Book</h1>
+  
+        <%= form_with model: @book do |f| %>
+          <p>Title</p>
+          <%= f.text_field :title %>
+          <p>Opinion</p>
+          <%= f.text_area :body %>
+          <%= f.submit 'Update Book' %>
+        <% end %>
+        <%= link_to "Show",book_path(@book.id) %> | <%= link_to "Back", books_path %>
+    </main>
+  
+    <footer>
+      <p>CopyRight Infratop.inc</p>
+    </footer>
+  </body>
 
-      <%= form_with model: @book do |f| %>
-        <p>Title</p>
-        <%= f.text_field :title %>
-        <p>Opinion</p>
-        <%= f.text_area :body %>
-        <%= f.submit 'Update Book' %>
-      <% end %>
-      <%= link_to "Show",book_path(@book.id) %> | <%= link_to "Back", books_path %>
-  </main>
-
-  <footer>
-    <p>CopyRight Infratop.inc</p>
-  </footer>
-</body>
+</html>

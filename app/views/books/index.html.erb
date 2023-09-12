@@ -1,80 +1,92 @@
-<head>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
 
-</head>
+      <script src="https://kit.fontawesome.com/195c3a23e3.js" crossorigin="anonymous"></script>
 
-<body>
-  <header>
+      <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-  </header>
+  </head>
 
-  <maim>
-    <div>
-      <%= flash[:notice] %>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4">
-          <h2>User info</h2>
-          <table>
-            <% if current_user.image.attached? %>
-              <%= image_tag current_user.image, size: "100x100" %>
-            <% else %>
-              <%= image_tag 'NO_IMAGE', size: "100x100" %>
-            <% end %>
-            <tr>
-              <th>name</th>
-              <th><%= current_user.name %></th>
-            </tr>
-            <tr>
-              <th>introduction</th>
-              <th><%= current_user.introduction %></th>
-            </tr>
-            <%= link_to "アイコン入れる", edit_user_path(current_user.id) %>
-          </table>
+  <body>
+    <header>
 
-          <h2>New book</h2>
-          <% if @book.errors.any? %>
-            <%= @book.errors.count %>errors prohibited this obj from being saved:
-            <ul>
-              <% @book.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-          <% end %>
+    </header>
 
-          <%= form_with model: @book do |f| %>
-            <p>Title</p>
-            <%= f.text_field :title %>
-            <p>Opinion</p>
-            <%= f.text_area :body %>
-            <%= f.submit 'Create Book' %>
-          <% end %>
-        </div>
-
-        <div class="col-lg-8">
-          <h2>Books</h2>
-           <table>
-             <tr>
-               <th>Title</th>
-               <th>Opinion</th>
-             </tr>
-             <% @books.each do |book| %>
-             <tr>
-               <th>
-                 <%= link_to book.title, "/books/#{book.id}" %>
-               </th>
-               <th><%= book.body %></th>
-             </tr>
-             <% end %>
-           </table>
-
-        </div>
+    <maim>
+      <div>
+        <%= flash[:notice] %>
       </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <h2>User info</h2>
+            <table>
+              <tr>
+              <%= image_tag current_user.get_profile_image(100,100) %>
+              </tr>
+              <tr>
+                <th>name</th>
+                <th><%= current_user.name %></th>
+              </tr>
+              <tr>
+                <th>introduction</th>
+                <th><%= current_user.introduction %></th>
+              </tr>
+              <%= link_to "アイコンを入れる", edit_user_path(current_user.id) %>
+            </table>
 
-    </div>
-  </maim>
+            <h2>New book</h2>
+            <% if @book.errors.any? %>
+              <%= @book.errors.count %>errors prohibited this obj from being saved:
+              <ul>
+                <% @book.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            <% end %>
 
-  <footer>
-    <p>CopyRight Infratop.inc</p>
-  </footer>
-</body>
+            <%= form_with model: @book do |f| %>
+              <p>Title</p>
+              <%= f.text_field :title %>
+              <p>Opinion</p>
+              <%= f.text_area :body %>
+              <%= f.submit 'Create Book' %>
+            <% end %>
+          </div>
+
+          <div class="col-lg-8">
+            <h2>Books</h2>
+             <table>
+               <tr>
+                 <th>Title</th>
+                 <th>Opinion</th>
+               </tr>
+               <% @books.each do |book| %>
+               <tr>
+                 <th>
+                   <%= image_tag @user.get_profile_image(100,100) %>
+                   <%= link_to book.title, "/books/#{book.id}" %>
+                 </th>
+                 <th><%= book.body %></th>
+               </tr>
+               <% end %>
+             </table>
+
+          </div>
+        </div>
+
+      </div>
+    </maim>
+
+    <footer>
+      <p>CopyRight Infratop.inc</p>
+    </footer>
+  </body>
+
+</html>

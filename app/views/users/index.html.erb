@@ -1,74 +1,79 @@
-<head>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
 
-</head>
+      <script src="https://kit.fontawesome.com/195c3a23e3.js" crossorigin="anonymous"></script>
 
-<body>
-  <header>
+      <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-  </header>
+  </head>
 
-  <maim>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4">
-          <h2>User info</h2>
-          <table>
-            <% if current_user.image.attached? %>
-              <%= image_tag current_user.image, size: "100x100" %>
-            <% else %>
-              <%= image_tag 'NO_IMAGE', size: "100x100" %>
+  <body>
+    <header>
+
+    </header>
+
+    <maim>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <h2>User info</h2>
+            <table>
+              <tr>
+              <%= image_tag current_user.get_profile_image(100,100) %>
+              </tr>
+              <tr>
+                <th>name</th>
+                <th><%= current_user.name %></th>
+              </tr>
+              <tr>
+                <th>introduction</th>
+                <th><%= current_user.introduction %></th>
+              </tr>
+              <%= link_to "アイコン入れる", edit_user_path(current_user.id) %>
+            </table>
+
+            <h2>New book</h2>
+            <%= form_with model: @book do |f| %>
+              <p>Title</p>
+              <%= f.text_field :title %>
+              <p>Opinion</p>
+              <%= f.text_area :body %>
+              <%= f.submit 'Create Book' %>
             <% end %>
-            <tr>
-              <th>name</th>
-              <th><%= current_user.name %></th>
-            </tr>
-            <tr>
-              <th>introduction</th>
-              <th><%= current_user.introduction %></th>
-            </tr>
-            <%= link_to "アイコン入れる", edit_user_path(current_user.id) %>
-          </table>
+          </div>
 
-          <h2>New book</h2>
-          <%= form_with model: @book do |f| %>
-            <p>Title</p>
-            <%= f.text_field :title %>
-            <p>Opinion</p>
-            <%= f.text_area :body %>
-            <%= f.submit 'Create Book' %>
-          <% end %>
+          <div class="col-lg-8">
+            <h2>Users</h2>
+             <table>
+               <tr>
+                 <th>image</th>
+                 <th>name</th>
+               </tr>
+               <% @users.each do |user| %>
+               <tr>
+                 <th><%= image_tag user.get_profile_image(100,100) %></th>
+                 <th><%= user.name %></th>
+                 <th><%= user.introduction %></th>
+                 <th><%= link_to "Show", user_path(user.id) %></th>
+               </tr>
+               <% end %>
+             </table>
+
+          </div>
         </div>
 
-        <div class="col-lg-8">
-          <h2>Users</h2>
-           <table>
-             <tr>
-               <th>image</th>
-               <th>name</th>
-             </tr>
-             <% @users.each do |user| %>
-             <tr>
-               <th>
-                 <% if user.image.attached? %>
-                   <%= image_tag user.image, size: "80x80" %>
-                 <% else %>
-                   <%= image_tag 'NO_IMAGE', size: "80x80" %>
-                 <% end %>
-               </th>
-               <th><%= user.name %></th>
-               <th><%= user.introduction %></th>
-               <th><%= link_to "Show", user_path(user.id) %></th>
-             </tr>
-             <% end %>
-           </table>
-
-        </div>
       </div>
+    </maim>
 
-    </div>
-  </maim>
+    <footer>
+      <p>CopyRight Infratop.inc</p>
+    </footer>
+  </body>
 
-  <footer>
-    <p>CopyRight Infratop.inc</p>
-  </footer>
-</body>
+</html>
