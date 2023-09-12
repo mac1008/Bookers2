@@ -8,6 +8,9 @@
   </header>
 
   <maim>
+    <div>
+      <%= flash[:notice] %>
+    </div>
     <div class="container">
       <div class="row">
         <div class="col-lg-4">
@@ -25,6 +28,15 @@
           </table>
 
           <h2>New book</h2>
+          <% if @book.errors.any? %>
+            <%= @book.errors.count %>errors prohibited this obj from being saved:
+            <ul>
+              <% @book.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          <% end %>
+
           <%= form_with model: @book_new do |f| %>
             <p>Title</p>
             <%= f.text_field :title %>
