@@ -28,7 +28,7 @@
             <h2>User info</h2>
             <table>
               <tr>
-              <%= image_tag @user.get_profile_image(100,100) %>
+              <%= image_tag @book.user.get_profile_image(100,100) %>
               </tr>
                 <th>name</th>
                 <th><%= @book.user.name %></th>
@@ -37,7 +37,9 @@
                 <th><%= @book.user.introduction %></th>
                 <th></th>
               </tr>
-              <%= link_to "アイコン入れる", edit_user_path(@book.user.id) %>
+                <%= link_to edit_user_path(current_user.id), class: "btn btn-default" do %>
+                <i class="fa-solid fa-user-gear"></i>
+                <% end %>
             </table>
 
             <h2>New book</h2>
@@ -63,11 +65,19 @@
             <h2>Book detail</h2>
              <table>
                <tr>
-                 <th><%= image_tag @user.get_profile_image(100,100) %></th>
+                 <th><%= image_tag @book.user.get_profile_image(100,100) %></th>
                  <th><%= @book.title %></th>
                  <th><%= @book.body %></th>
-                 <th><%= link_to "Edit",edit_book_path(@book.id) %></th>
-                 <th><%= link_to "Destroy","/books/#{@book.id}", method: :delete, "data-confirm" => "本当に消しますか？" %></th>
+                 <th>
+                   <% if @book.user == current_user %>
+                     <%= link_to "Edit",edit_book_path(@book.id) %></th>
+                   <% end %>
+                 </th>
+                 <th>
+                   <% if @book.user == current_user %>
+                     <%= link_to "Destroy","/books/#{@book.id}", method: :delete, "data-confirm" => "本当に消しますか？" %>
+                   <% end %>
+                 </th>
                </tr>
              </table>
 
