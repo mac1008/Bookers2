@@ -65,7 +65,10 @@
             <h2>Book detail</h2>
              <table>
                <tr>
-                 <th><%= image_tag @book.user.get_profile_image(100,100) %></th>
+                 <th>
+                   <%= image_tag @book.user.get_profile_image(100,100) %>
+                   <%= link_to @book.user.name, user_path(@book.user.id) %>
+                 </th>
                  <th><%= @book.title %></th>
                  <th><%= @book.body %></th>
                  <th>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <script src="https://kit.fontawesome.com/195c3a23e3.js" crossorigin="anonymous"></script>
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -12,42 +13,68 @@
 
   <body>
     <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
-        <div class="row">
-          <ul class="list-inline">
-            <li>
-              <%= link_to "Bookers", root_path %>
-            </li>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <a class="navbar-brand m-3">
+            <%= link_to "Bookers", root_path, class:"text-white" %>
+          </a>
+          <ul class="navbar-nav ml-auto">
             <% if user_signed_in? %>
-              <li class="col">
-                <%= link_to "Home", user_path(current_user.id) %>
+              <li>
+                <%= link_to user_path(current_user.id), class:"text-white" do %>
+                  <i class="fa-solid fa-house"></i>
+                <% end %>
+                <%= link_to "Home", user_path(current_user.id), class:"text-white" %>
               </li>
-              <li class="col">
-                <%= link_to "Users", users_path %>
+              <li>
+                <%= link_to users_path, class:"text-white" do %>
+                  <i class="fa-solid fa-users"></i>
+                <% end %>
+                <%= link_to "Users", users_path, class:"text-white" %>
               </li>
-              <li class="col">
-                <%= link_to "Books", books_path %>
+              <li>
+                <%= link_to books_path, class:"text-white" do %>
+                  <i class="fa-solid fa-book-open"></i>
+                <% end %>
+                <%= link_to "Books", books_path, class:"text-white" %>
               </li>
-              <li class="col">
-                <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+              <li>
+                <%= link_to destroy_user_session_path, method: :delete, class:"text-white" do %>
+                  <i class="fa-solid fa-right-from-bracket"></i>
+                <% end %>
+                <%= link_to "Log out", destroy_user_session_path, method: :delete, class:"text-white" %>
               </li>
             <% else %>
-              <li class="col">
-                <%= link_to "Home", root_path %>
+              <li>
+                <%= link_to root_path, class:"text-white" do %>
+                  <i class="fa-solid fa-house"></i>
+                <% end %>
+                <%= link_to "Home", root_path, class:"text-white" %>
               </li>
-              <li class="col">
-                <%= link_to "About", '/home/about' %>
+              <li>
+                <%= link_to '/home/about', class:"text-white" do %>
+                  <i class="fa-solid fa-link"></i>
+                <% end %>
+                <%= link_to "About", '/home/about' , class:"text-white" %>
               </li>
-              <li class="col">
-                <%= link_to "Sign up", new_user_registration_path %>
+              <li>
+                <%= link_to new_user_registration_path, class:"text-white" do %>
+                  <i class="fa-solid fa-user-plus"></i>
+                <% end %>
+                <%= link_to "Sign up", new_user_registration_path, class:"text-white" %>
               </li>
-              <li class="col">
-                <%= link_to "Log in", new_user_session_path %>
+              <li>
+                <%= link_to new_user_session_path, class:"text-white" do %>
+                  <i class="fa-solid fa-right-to-bracket"></i>
+                <% end %>
+                <%= link_to "Log in", new_user_session_path, class:"text-white" %>
               </li>
             <% end %>
           </ul>
         </div>
       </div>
+      </nav>
     </header>
 
     <%= yield %>
