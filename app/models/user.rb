@@ -9,10 +9,13 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
 
   validates :name,
-    length: { minimum: 2, maximum: 20 }
+    length: { minimum: 2, maximum: 20 }, uniqueness: true
 
   validates :introduction,
-    length: { minimum: 0, maximum: 50 }
+    length: { maximum: 50 }, on: :create
+
+  validates :introduction,
+    length: { maximum: 50 }, allow_blank: true, on: :update
 
   def get_profile_image(width, height)
     unless profile_image.attached?

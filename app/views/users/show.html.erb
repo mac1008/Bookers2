@@ -24,7 +24,7 @@
       </div>
       <div class="container px-5 px-sm-0">
         <div class="row">
-          <div class="col-lg-3">
+          <div class="col-md-3">
             <h2>User info</h2>
             <%= image_tag @user.get_profile_image(100,100) %>
             <table class="table">
@@ -39,8 +39,8 @@
             </table>
 
             <div class="row">
-              <%= link_to edit_user_path(current_user), class:"btn btn-outline-secondary btn-block" do %>
-              <i class="fa-solid fa-user-gear"></i>
+              <%= link_to edit_user_path(@user), class:"btn btn-outline-secondary btn-block" do %>
+              <i class="fa-solid fa-user-cog"></i>
               <% end %>
             </div>
 
@@ -63,7 +63,7 @@
             <% end %>
           </div>
 
-          <div class="col-lg-8 offset-md-1">
+          <div class="col-md-8 offset-md-1">
             <h2>Books</h2>
              <table class="table table-hover table-inverse">
                <thead>
@@ -77,7 +77,9 @@
                <tbody>
                  <% @books.each do |book| %>
                  <tr>
-                   <td><%= image_tag @user.get_profile_image(80,80) %></td>
+                   <%= link_to user_path(book.user) do %>
+                     <td><%= image_tag @user.get_profile_image(80,80) %></td>
+                   <% end %>
                    <td><%= link_to book.title, "/books/#{book.id}" %></td>
                    <td><%= book.body %></td>
                  </tr>
